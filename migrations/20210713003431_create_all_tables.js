@@ -5,6 +5,7 @@ exports.up = function(knex) {
           table.increments('id');
           table.string('user_id', 255).notNullable();
           table.string('title', 255).notNullable();
+          table.timestamp('created_at').defaultTo(knex.fn.now());
       })
       .createTable('tags', function (table) {
           table.increments('id');
