@@ -15,6 +15,7 @@ module.exports = async (req, res, next) => {
     const tagsCounted = countBy(tags, method('valueOf'));
 
     for (let tag in tagsCounted) {
+        tag = tag.toLowerCase();
         // increment in DB
         const count = await database('tags').where({
             tag_name: tag
