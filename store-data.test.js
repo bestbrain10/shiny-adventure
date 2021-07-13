@@ -7,7 +7,7 @@ const { mockRequest, mockResponse } = require('./mocks');
 
 describe('Store Data Middleware', () => {
     const insertMock = jest.fn();
-    const rawMock = jest.spyOn(database, 'raw').mockResolvedValue([[ { tag_name: 'taggy' }]]);
+    const rawMock = jest.spyOn(database, 'raw').mockResolvedValue({ rows: [{ tag_name: 'taggy' }] });
     const incrementMock = jest.fn().mockResolvedValueOnce(1).mockResolvedValue(0);
     const whereMock = jest.fn().mockReturnValue({
         increment: incrementMock

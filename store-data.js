@@ -6,7 +6,7 @@ const webhook = require('./call-webhook');
 module.exports = async (req, res, next) => {
     // save the ticket
     const { user_id, title, tags } = req.body;
-    const data = await database('tickets').insert({
+    await database('tickets').insert({
         user_id,
         title
     });
@@ -31,10 +31,16 @@ module.exports = async (req, res, next) => {
     }
 
     // fetch highest counting tag and send to webhook
-    const [ [ highestCountTag ] ] = await database.raw(`SELECT MAX(count) as count, LOWER(tag_name) as tag_name FROM tags GROUP BY tag_name LIMIT 1`);
+    const result = await database.raw(`SELECT MAX(count) as count, LOWER(tag_name) as tag_name FROM tags GROUP BY tag_name LIMIT 1`);
+    const { rows: [ highestCountTag ] }  = result;
     if (highestCountTag) {
         webhook(highestCountTag.tag_name);
     }
 
-    res.json({data});
+    res.json({
+        status: 'success',
+        data: {
+            created: true
+        }
+    });
 };
