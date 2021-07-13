@@ -4,9 +4,9 @@ A nodeJS api that accepts the JSON payload below on the route `POST /`.
 
 ```js
     {
-    "user_id" : 1234,
-    "title" : "My title",
-    "tags" : ["tag1", "tag2"]
+        "user_id" : 1234,
+        "title" : "My title",
+        "tags" : ["tag1", "tag2"]
     }
 ```
 
