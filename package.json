@@ -15,6 +15,7 @@
     "nodemon": "^2.0.12"
   },
   "scripts": {
+    "start": "node index.js",
     "start:dev": "nodemon index.js",
     "test": "jest",
     "test:watch": "jest --watch",
