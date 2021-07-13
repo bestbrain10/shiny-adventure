@@ -16,7 +16,7 @@ Application uses mysql database. The credentials for the database can be configu
 If your database don't have the tables and structure required to run the application run
 
 ```bash
-    npm run migrate:up
+    npm run migrate:run
 ```
 
 
