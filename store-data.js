@@ -15,7 +15,6 @@ module.exports = async (req, res, next) => {
     const tagsCounted = countBy(tags, method('valueOf'));
 
     for (let tag in tagsCounted) {
-        tag = tag.toLowerCase();
         // increment in DB
         const count = await database('tags').where({
             tag_name: tag
@@ -32,7 +31,7 @@ module.exports = async (req, res, next) => {
     }
 
     // fetch highest counting tag and send to webhook
-    const [ [ highestCountTag ] ] = await database.raw(`SELECT MAX(count) as count, tag_name FROM tags GROUP BY tag_name LIMIT 1`);
+    const [ [ highestCountTag ] ] = await database.raw(`SELECT MAX(count) as count, LOWER(tag_name) as tag_name FROM tags GROUP BY tag_name LIMIT 1`);
     if (highestCountTag) {
         webhook(highestCountTag.tag_name);
     }
